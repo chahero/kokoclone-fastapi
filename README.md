@@ -216,6 +216,15 @@ model/                → Downloaded Kokoro model weights (Auto-populates)
 voice/                → Downloaded Kokoro voice bins (Auto-populates)
 
 ```
+## Star History
+
+<a href="https://www.star-history.com/#Ashish-Patnaik/kokoclone&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Ashish-Patnaik/kokoclone&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Ashish-Patnaik/kokoclone&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Ashish-Patnaik/kokoclone&type=Date" />
+ </picture>
+</a>
 
 
 ## Acknowledgments
