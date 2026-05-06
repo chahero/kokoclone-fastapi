@@ -19,6 +19,18 @@
 
 **KokoClone** is a fast, real-time compatible multilingual voice cloning system built on top of **Kokoro-ONNX**, one of the fastest open-source neural TTS engines available today.
 
+## About This Fork
+
+This repository is a public fork of the original [KokoClone](https://github.com/Ashish-Patnaik/kokoclone) project.
+
+The original KokoClone voice-cloning pipeline is preserved, while this fork adds a server-oriented layer for API and container deployment:
+
+* FastAPI endpoints for text-to-cloned-speech and audio-to-audio voice conversion
+* Gradio Web UI mounted under the same FastAPI server at `/web`
+* Docker CPU/GPU support
+* GHCR GPU image publishing for arm64 deployment
+* Verified GPU container deployment on NVIDIA DGX Spark using host port `8890`
+
 It allows you to:
 * **Text → Clone:** Type text in multiple languages, provide a short reference audio clip, and instantly generate speech in that same voice.
 * **Audio → Clone:** Re-voice an existing audio recording to sound like any reference speaker — *no transcription needed*.
@@ -53,8 +65,8 @@ You can set up KokoClone using either **Conda** (Recommended) or **uv**.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Ashish-Patnaik/kokoclone.git
-cd kokoclone
+git clone https://github.com/chahero/kokoclone-fastapi.git
+cd kokoclone-fastapi
 
 ```
 
@@ -157,10 +169,22 @@ echo "$GITHUB_TOKEN" | docker login ghcr.io -u chahero --password-stdin
 ./publish-gpu.sh
 ```
 
+Default published image:
+
+```text
+ghcr.io/chahero/kokoclone-fastapi-gpu:latest-arm64
+```
+
 Run the published GPU image instead of building locally:
 
 ```bash
 docker compose -f docker/compose.gpu.image.yml up -d
+```
+
+Health check for Docker/GHCR runs:
+
+```bash
+curl http://localhost:8890/health
 ```
 
 ### 2. Web Interface (Gradio)
