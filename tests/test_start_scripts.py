@@ -19,6 +19,13 @@ def test_shell_scripts_use_expected_compose_files():
     assert "docker compose -f docker/compose.gpu.yml up --build" in gpu_script
 
 
+def test_shell_scripts_are_sh_compatible():
+    for script_name in ["start-cpu.sh", "start-gpu.sh"]:
+        script = Path(script_name).read_text(encoding="utf-8")
+        assert script.startswith("#!/usr/bin/env sh")
+        assert "pipefail" not in script
+
+
 def test_powershell_scripts_use_expected_compose_files():
     cpu_script = Path("start-cpu.ps1").read_text(encoding="utf-8")
     gpu_script = Path("start-gpu.ps1").read_text(encoding="utf-8")
