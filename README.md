@@ -148,6 +148,8 @@ Docker GPU:
 
 On Windows, use `.\start-cpu.ps1` or `.\start-gpu.ps1`.
 
+The Docker compose files publish the API on host port `8890` to avoid colliding with Kokoro-FastAPI on `8880`.
+
 ### 2. Web Interface (Gradio)
 
 Launch the interactive web app through FastAPI:
@@ -157,7 +159,7 @@ python app.py
 
 ```
 
-Then open `http://localhost:8880/web`.
+Then open `http://localhost:8880/web` for local Python runs, or `http://localhost:8890/web` for Docker runs.
 
 * **Tab 1 (Text → Clone):** Enter text, pick a language, upload a reference voice, and generate.
 * **Tab 2 (Audio → Clone):** Upload source audio and a reference voice, and get back re-voiced audio.
