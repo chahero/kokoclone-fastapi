@@ -8,7 +8,7 @@ dependencies = [
     "fastapi>=0.115.0",
     "gradio>=6.8.0",
     "huggingface-hub>=1.5.0",
-    "kanade-tokenizer",
+    "kanade-tokenizer @ git+https://github.com/frothywater/kanade-tokenizer",
     "kokoro-onnx>=0.5.0",
     "misaki[en,ja,zh]>=0.9.4",
     "ninja>=1.13.0",
@@ -28,9 +28,6 @@ test = [
     "httpx>=0.27.0",
     "pytest>=8.0.0",
 ]
-
-[tool.uv.sources]
-kanade-tokenizer = { git = "https://github.com/frothywater/kanade-tokenizer" }
 
 [tool.uv]
 no-build-isolation-package = ["flash-attn"]
