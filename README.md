@@ -150,6 +150,19 @@ On Windows, use `.\start-cpu.ps1` or `.\start-gpu.ps1`.
 
 The Docker compose files publish the API on host port `8890` to avoid colliding with Kokoro-FastAPI on `8880`.
 
+Publish a validated GPU image to GHCR:
+
+```bash
+echo "$GITHUB_TOKEN" | docker login ghcr.io -u chahero --password-stdin
+./publish-gpu.sh
+```
+
+Run the published GPU image instead of building locally:
+
+```bash
+docker compose -f docker/compose.gpu.image.yml up -d
+```
+
 ### 2. Web Interface (Gradio)
 
 Launch the interactive web app through FastAPI:

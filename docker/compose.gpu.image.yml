@@ -1,8 +1,6 @@
 services:
   kokoclone:
-    build:
-      context: ..
-      dockerfile: docker/gpu/Dockerfile
+    image: ghcr.io/chahero/kokoclone-fastapi-gpu:latest-arm64
     container_name: kokoclone-fastapi
     restart: always
     ports:
