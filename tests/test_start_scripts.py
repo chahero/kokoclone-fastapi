@@ -32,3 +32,10 @@ def test_powershell_scripts_use_expected_compose_files():
 
     assert "docker compose -f docker/compose.cpu.yml up --build" in cpu_script
     assert "docker compose -f docker/compose.gpu.yml up --build" in gpu_script
+
+
+def test_compose_files_publish_to_non_conflicting_host_port():
+    for compose_file in ["docker/compose.cpu.yml", "docker/compose.gpu.yml"]:
+        compose = Path(compose_file).read_text(encoding="utf-8")
+        assert '"8890:8880"' in compose
+        assert '"8880:8880"' not in compose
