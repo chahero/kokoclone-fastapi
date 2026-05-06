@@ -4,6 +4,10 @@ torchaudio
 soundfile
 huggingface_hub
 gradio
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic-settings
 # Text-to-Speech (Kokoro)
 kokoro-onnx
 misaki[en,ja,zh]

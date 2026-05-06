@@ -105,21 +105,64 @@ source .venv/bin/activate  # Linux/macOS
 
 ##  Usage
 
-KokoClone is highly flexible and can be used via Web UI, CLI, or Python API.
+KokoClone is highly flexible and can be used via FastAPI, Web UI, CLI, or Python API.
 
-### 1. Web Interface (Gradio)
+### 1. FastAPI Server
 
-Launch the interactive web app:
+Launch the API server:
+
+```bash
+python app.py
+```
+
+The server exposes:
+
+* `GET /health` - health check
+* `GET /docs` - Swagger UI
+* `GET /web` - Gradio Web UI mounted inside FastAPI
+* `GET /api/languages` - supported language codes
+* `POST /api/tts/clone` - text + reference audio to cloned speech
+* `POST /api/audio/convert` - source audio + reference audio to re-voiced speech
+
+Example:
+
+```bash
+curl -X POST http://localhost:8880/api/tts/clone \
+  -F "text=Hello from KokoClone" \
+  -F "lang=en" \
+  -F "reference_audio=@reference.wav" \
+  --output output.wav
+```
+
+Docker CPU:
+
+```bash
+./start-cpu.sh
+```
+
+Docker GPU:
+
+```bash
+./start-gpu.sh
+```
+
+On Windows, use `.\start-cpu.ps1` or `.\start-gpu.ps1`.
+
+### 2. Web Interface (Gradio)
+
+Launch the interactive web app through FastAPI:
 
 ```bash
 python app.py
 
 ```
 
+Then open `http://localhost:8880/web`.
+
 * **Tab 1 (Text → Clone):** Enter text, pick a language, upload a reference voice, and generate.
 * **Tab 2 (Audio → Clone):** Upload source audio and a reference voice, and get back re-voiced audio.
 
-### 2. Command Line Interface (CLI)
+### 3. Command Line Interface (CLI)
 
 Generate speech directly from your terminal.
 
@@ -146,7 +189,7 @@ python cli.py --mode convert --source original_speech.wav --ref target_voice.wav
 | `--ref` | — | Path to reference voice audio *(always required)* |
 | `--out` | `output.wav` | Output file path |
 
-### 3. Python API
+### 4. Python API
 
 Integrate KokoClone into your own Python applications.
 

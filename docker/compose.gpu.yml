@@ -1,0 +1,27 @@
+services:
+  kokoclone:
+    build:
+      context: ..
+      dockerfile: docker/gpu/Dockerfile
+    ports:
+      - "8880:8880"
+    environment:
+      KOKOCLONE_ENABLE_WEBUI: "true"
+      KOKOCLONE_TEMP_DIR: /tmp/kokoclone
+      KOKOCLONE_MAX_CONCURRENT_JOBS: "1"
+    volumes:
+      - huggingface-cache:/root/.cache/huggingface
+      - model-cache:/app/model
+      - voice-cache:/app/voice
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  huggingface-cache:
+  model-cache:
+  voice-cache:
